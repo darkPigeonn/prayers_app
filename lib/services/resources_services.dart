@@ -12,17 +12,43 @@ class ResourceService {
       'partner': 'keuskupanSby'
     };
     final response = await http.get(
-      Uri.parse('https://api.imavi.org/imavi/prayers/get-all'),
+      // Uri.parse('https://api.imavi.org/imavi/prayers/get-all'),
+      Uri.parse('http://localhost:3005/imavi/prayers/get-all'),
       headers: headers,
     );
 
     if (response.statusCode == 200) {
       final List result = jsonDecode(response.body);
+
       return result.map(((e) => ResourceModel.fromJson(e))).toList();
     } else {
+      print(response);
       throw Exception(response.reasonPhrase);
     }
   }
+
+  Future<ResourceModel> getPrayersToday() async {
+    Map<String, String> headers = {
+      'Id': '619c3c2e29baa215519da64d',
+      'Secret': '360039ed-79a6-4853-8304-c7b21e166f5f',
+      'partner': 'keuskupanSby'
+    };
+    final response = await http.get(
+      // Uri.parse('https://api.imavi.org/imavi/prayers/get-all'),
+      Uri.parse('http://localhost:3005/imavi/prayers/get-all'),
+      headers: headers,
+    );
+
+    if (response.statusCode == 200) {
+      ResourceModel result = ResourceModel.fromJson(jsonDecode(response.body));
+
+      return result;
+    } else {
+      print(response);
+      throw Exception(response.reasonPhrase);
+    }
+  }
+
 }
 
 final resourceProvider = Provider<ResourceService>((ref) => ResourceService());
