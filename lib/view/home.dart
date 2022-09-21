@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:prayers_app/model/resource_model.dart';
 import 'package:prayers_app/providers/resources_provider.dart';
 import 'package:prayers_app/view/detailResource.dart';
 import 'package:simple_moment/simple_moment.dart';
 
 class HomePage extends ConsumerWidget {
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Future refreshData() async {
       ref.refresh(prayersProvider);
+      ref.refresh(todayPrayerProvider);
     }
+
     final _listPrayers = ref.watch(prayersProvider);
+    final todayPrayers = ref.watch(todayPrayerProvider);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Colors.red[900],
         centerTitle: true,
         title: Text('KUMPULAN DOA'),
         actions: [
@@ -40,37 +44,66 @@ class HomePage extends ConsumerWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               )),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            width: MediaQuery.of(context).size.width,
-            height: 150,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(20)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset(
-                  'assets/bg-prayer.jpeg',
-                  fit: BoxFit.fill,
-                ),
-                Container(
-                    margin: EdgeInsets.all(10),
-                    child: Text(
-                      '',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ))
-              ],
-            ),
-          ),
+              child: todayPrayers.when(
+                  data: (_data) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailResource(dataDetails: _data)));
+                      },
+                      child: Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        width: MediaQuery.of(context).size.width,
+                        height: 150,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.all(10),
+                                child: Text(
+                                  _data.title!,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                            Container(
+                              transform:
+                                  Matrix4.translationValues(50.0, 0.0, 0.0),
+                              child: Image.asset(
+                                'assets/bg-prayer.jpeg',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ],
+                        ),
+                        // ),
+                      ),
+                    );
+                  },
+                  error: (err, s) {
+                    return Center(
+                      child: Text(err.toString()),
+                    );
+                  },
+                  loading: () => Center(
+                        child: CircularProgressIndicator(),
+                      ))),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: Text(

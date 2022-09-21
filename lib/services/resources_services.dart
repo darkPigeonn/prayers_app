@@ -12,8 +12,8 @@ class ResourceService {
       'partner': 'keuskupanSby'
     };
     final response = await http.get(
-      // Uri.parse('https://api.imavi.org/imavi/prayers/get-all'),
-      Uri.parse('http://localhost:3005/imavi/prayers/get-all'),
+      Uri.parse('https://api.imavi.org/imavi/prayers/get-all'),
+      // Uri.parse('http://localhost:3005/imavi/prayers/get-all'),
       headers: headers,
     );
 
@@ -34,21 +34,19 @@ class ResourceService {
       'partner': 'keuskupanSby'
     };
     final response = await http.get(
-      // Uri.parse('https://api.imavi.org/imavi/prayers/get-all'),
-      Uri.parse('http://localhost:3005/imavi/prayers/get-all'),
+      Uri.parse('https://api.imavi.org/imavi/prayers/get-today'),
+      // Uri.parse('http://localhost:3005/imavi/prayers/get-all'),
       headers: headers,
     );
 
     if (response.statusCode == 200) {
       ResourceModel result = ResourceModel.fromJson(jsonDecode(response.body));
-
       return result;
     } else {
       print(response);
       throw Exception(response.reasonPhrase);
     }
   }
-
 }
 
 final resourceProvider = Provider<ResourceService>((ref) => ResourceService());

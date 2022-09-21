@@ -5,3 +5,7 @@ import 'package:prayers_app/services/resources_services.dart';
 final prayersProvider = FutureProvider<List<ResourceModel>>((ref) async {
   return ref.read(resourceProvider).getPrayers();
 });
+
+final todayPrayerProvider = FutureProvider<ResourceModel>((ref) async {
+  return ref.watch(resourceProvider).getPrayersToday();
+});

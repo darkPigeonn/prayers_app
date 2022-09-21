@@ -29,13 +29,12 @@ class _DetailResourceState extends State<DetailResource> {
   Widget build(BuildContext context) {
     ResourceModel data = widget.dataDetails;
 
-    Moment rawDate = Moment.parse(data.publishDate!);
-    var date = rawDate.format('dd MMM yyyy');
+    var date = DateTime.now();
 
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
-        backgroundColor: Color.fromARGB(255, 106, 0, 124),
+        backgroundColor: Colors.red[900],
         actions: [
           Padding(
             padding: EdgeInsets.all(0),
@@ -59,42 +58,42 @@ class _DetailResourceState extends State<DetailResource> {
             SizedBox(
               height: 10,
             ),
+            // Container(
+            //   margin: EdgeInsets.symmetric(
+            //     vertical: 20,
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       Container(
+            //         padding: EdgeInsets.all(10),
+            //         decoration:
+            //             BoxDecoration(color: Color.fromARGB(255, 139, 9, 0)),
+            //         child: Text(
+            //           '',
+            //           style: const TextStyle(
+            //             fontSize: 14.0,
+            //             color: Colors.white,
+            //           ),
+            //         ),
+            //       ),
+            //       Container(
+            //         padding: EdgeInsets.all(10),
+            //         decoration:
+            //             BoxDecoration(color: Color.fromARGB(255, 213, 99, 0)),
+            //         child: Text(
+            //           '',
+            //           style: const TextStyle(
+            //             fontSize: 14.0,
+            //             color: Colors.white,
+            //           ),
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
             Container(
-              margin: EdgeInsets.symmetric(
-                vertical: 20,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration:
-                        BoxDecoration(color: Color.fromARGB(255, 139, 9, 0)),
-                    child: Text(
-                      data.author!,
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration:
-                        BoxDecoration(color: Color.fromARGB(255, 213, 99, 0)),
-                    child: Text(
-                      date,
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              margin: EdgeInsets.symmetric(horizontal: 20),
               child: Html(
                 data: data.content,
                 style: {
