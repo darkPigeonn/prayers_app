@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.imavi.doa_harian_wm">
+    package="com.imavi.widya_mandala_spiritual_way">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="Doa Harian WM"
+        android:label="Widya Mandala Spiritual Way"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

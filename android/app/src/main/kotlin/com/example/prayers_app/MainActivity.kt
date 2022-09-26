@@ -1,4 +1,4 @@
-package com.imavi.doa_harian_wm
+package com.imavi.widya_mandala_spiritual_way
 
 import io.flutter.embedding.android.FlutterActivity
 
