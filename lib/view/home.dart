@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prayers_app/model/resource_model.dart';
 import 'package:prayers_app/providers/resources_provider.dart';
 import 'package:prayers_app/view/detailResource.dart';
+import 'package:prayers_app/view/info.dart';
 import 'package:simple_moment/simple_moment.dart';
 
 class HomePage extends ConsumerWidget {
@@ -20,15 +21,25 @@ class HomePage extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.red[900],
         centerTitle: true,
-        title: Text('KUMPULAN DOA'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.replay),
-            onPressed: () {
-              refreshData();
-            },
-          ),
-        ],
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // IconButton(
+            //   icon: Icon(Icons.info),
+            //   onPressed: () {
+            //     Navigator.push(context, MaterialPageRoute(builder: (context)=> Info()));
+            //   },
+            // ),
+            Text('KUMPULAN DOA'),
+            IconButton(
+              icon: Icon(Icons.replay),
+              onPressed: () {
+                refreshData();
+              },
+            ),
+          ],
+        ),
+        actions: [],
       ),
       body: SafeArea(
           child: Column(
@@ -60,7 +71,13 @@ class HomePage extends ConsumerWidget {
                         width: MediaQuery.of(context).size.width,
                         height: 150,
                         decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Color.fromARGB(255, 76, 148, 198),
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                'assets/bg-jp2.jpg',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
@@ -72,7 +89,6 @@ class HomePage extends ConsumerWidget {
                             ],
                             borderRadius: BorderRadius.circular(20)),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                                 margin: EdgeInsets.all(10),
@@ -80,16 +96,9 @@ class HomePage extends ConsumerWidget {
                                   _data.title!,
                                   style: TextStyle(
                                       fontSize: 18,
+                                      color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 )),
-                            Container(
-                              transform:
-                                  Matrix4.translationValues(50.0, 0.0, 0.0),
-                              child: Image.asset(
-                                'assets/bg-prayer.jpeg',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
                           ],
                         ),
                         // ),
