@@ -1,18 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:prayers_app/model/resource_model.dart';
 import 'package:prayers_app/providers/resources_provider.dart';
+import 'package:prayers_app/services/notification.dart';
 import 'package:prayers_app/view/detailResource.dart';
 import 'package:prayers_app/view/info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_moment/simple_moment.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-class HomePage extends ConsumerWidget {
+// class HomePage extends StatefulWidget {
+//   HomePage({Key? key}) : super(key: key);
+
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
+
+// class _HomePageState extends State<HomePage> {
+//   @override
+//   void initState() {
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SafeArea(
+//         child: Column(
+//           children: [
+//             ElevatedButton(
+//                 onPressed: () async {
+//                   await scheduleWorkTime(0, 'Waktunya Jam Pulang',
+//                       'Jangan lupa klik jam pulang ya ', Time(10, 55));
+//                 },
+//                 child: Text('data')),
+//             // ScreenNew(),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class HomePage extends ConsumerStatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends ConsumerState<HomePage> {
+  late bool isActiveNotif = false;
+
+  setNotificationStatus(int code) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    //mengaktifkan notifikasi
+    if (code == 1) {
+      setState(() {
+        isActiveNotif = true;
+      });
+      pref.setBool('isNotificationStatus', true);
+    } else if (code == 0) {
+      setState(() {
+        isActiveNotif = false;
+      });
+      pref.setBool('isNotificationStatus', false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+
     Future refreshData() async {
       ref.refresh(prayersProvider);
       ref.refresh(todayPrayerProvider);
     }
+    print("isActiveNotif");
+    print(isActiveNotif);
+
 
     final _listPrayers = ref.watch(prayersProvider);
     final todayPrayers = ref.watch(todayPrayerProvider);
@@ -24,12 +92,32 @@ class HomePage extends ConsumerWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // IconButton(
-            //   icon: Icon(Icons.info),
-            //   onPressed: () {
-            //     Navigator.push(context, MaterialPageRoute(builder: (context)=> Info()));
-            //   },
-            // ),
+            IconButton(
+              icon: isActiveNotif
+                  ? Icon(Icons.notifications_active)
+                  : Icon(Icons.notifications_none),
+              onPressed: () async {
+                if (!isActiveNotif) {
+                  await scheduleWorkTime(0, 'Waktunya Doa', '', Time(12, 00));
+                  setNotificationStatus(1);
+                  Fluttertoast.showToast(
+                    msg: 'Notifikasi Pulang On',
+                    backgroundColor: Color.fromARGB(255, 2, 115, 0),
+                    textColor: Colors.white,
+                  );
+                } else {
+                  await cancelNotification();
+                  setNotificationStatus(0);
+                  Fluttertoast.showToast(
+                    msg: 'Notifikasi Pulang Off',
+                    backgroundColor: Color.fromARGB(255, 2, 115, 0),
+                    textColor: Colors.white,
+                  );
+                }
+
+                print("Notifikasi Doa Aktif");
+              },
+            ),
             Text('KUMPULAN DOA'),
             IconButton(
               icon: Icon(Icons.replay),
@@ -53,7 +141,8 @@ class HomePage extends ConsumerWidget {
               child: Text(
                 'Doa Hari ini',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              )),
+            ),
+          ),
           Container(
               child: todayPrayers.when(
                   data: (_data) {
@@ -74,7 +163,7 @@ class HomePage extends ConsumerWidget {
                             color: Color.fromARGB(255, 76, 148, 198),
                             image: const DecorationImage(
                               image: AssetImage(
-                                'assets/bg-jp2.jpg',
+                                'assets/bg-jp.jpg',
                               ),
                               fit: BoxFit.cover,
                             ),
@@ -91,7 +180,7 @@ class HomePage extends ConsumerWidget {
                         child: Row(
                           children: [
                             Container(
-                                margin: EdgeInsets.all(10),
+                                margin: EdgeInsets.all(30),
                                 child: Text(
                                   _data.title!,
                                   style: TextStyle(
