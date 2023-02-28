@@ -9,3 +9,7 @@ final prayersProvider = FutureProvider<List<ResourceModel>>((ref) async {
 final todayPrayerProvider = FutureProvider<ResourceModel>((ref) async {
   return ref.watch(resourceProvider).getPrayersToday();
 });
+
+final eventsTodaysProvider = FutureProvider<dynamic>((ref) async {
+  return ref.watch(resourceProvider).getEventsToday();
+});

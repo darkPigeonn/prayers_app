@@ -1,0 +1,142 @@
+{
+  "project_info": {
+    "project_number": "859691038944",
+    "project_id": "imavistatic",
+    "storage_bucket": "imavistatic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859691038944:android:b5ed420aefbdbad95f7885",
+        "android_client_info": {
+          "package_name": "com.example.pastoral_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859691038944-9gr67fpducfuu8itdr26j62mihhvvae6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pastoral_app",
+            "certificate_hash": "15fd6b3c8c7bcac0a541052a35bdc0e0b1061d5d"
+          }
+        },
+        {
+          "client_id": "859691038944-ljv736t06c0bs8tnjeutmrhjc57uc6q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDZTvgvmiyoUZEtCLhC_-VF0RzJJtTmVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859691038944-ljv736t06c0bs8tnjeutmrhjc57uc6q4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "859691038944-em9n2pb3kunq581ijgcodap2p2ki6ni1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.imavi.apps"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859691038944:android:0b270b86882d4d2b5f7885",
+        "android_client_info": {
+          "package_name": "com.imavi.apps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859691038944-ebm5rq6go77uesng4s218fhh2r5svke9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imavi.apps",
+            "certificate_hash": "15fd6b3c8c7bcac0a541052a35bdc0e0b1061d5d"
+          }
+        },
+        {
+          "client_id": "859691038944-ljv736t06c0bs8tnjeutmrhjc57uc6q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDZTvgvmiyoUZEtCLhC_-VF0RzJJtTmVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859691038944-ljv736t06c0bs8tnjeutmrhjc57uc6q4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "859691038944-em9n2pb3kunq581ijgcodap2p2ki6ni1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.imavi.apps"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859691038944:android:65a46bec9e60ce285f7885",
+        "android_client_info": {
+          "package_name": "com.imavi.widya_mandala_spiritual_way"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859691038944-7krsl27mp4n2424oqku0ofpp6bhmfrli.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.imavi.widya_mandala_spiritual_way",
+            "certificate_hash": "1c3be6bd62923a8074544e84e8c9b550f1384eda"
+          }
+        },
+        {
+          "client_id": "859691038944-ljv736t06c0bs8tnjeutmrhjc57uc6q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDZTvgvmiyoUZEtCLhC_-VF0RzJJtTmVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859691038944-ljv736t06c0bs8tnjeutmrhjc57uc6q4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "859691038944-em9n2pb3kunq581ijgcodap2p2ki6ni1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.imavi.apps"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
