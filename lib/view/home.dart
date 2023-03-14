@@ -6,6 +6,7 @@ import 'package:prayers_app/providers/resources_provider.dart';
 import 'package:prayers_app/services/notification.dart';
 import 'package:prayers_app/view/detailResource.dart';
 import 'package:prayers_app/view/info.dart';
+import 'package:prayers_app/view/settings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_moment/simple_moment.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -94,31 +95,12 @@ class HomePageState extends ConsumerState<HomePage> {
                 ),
               ),
               IconButton(
-              icon: isActiveNotif
-                  ? Icon(Icons.notifications_active)
-                  : Icon(Icons.notifications_none),
-              onPressed: () async {
-                if (!isActiveNotif) {
-                  await scheduleWorkTime(0, 'Waktunya Doa', '', Time(12, 00));
-                  setNotificationStatus(1);
-                  Fluttertoast.showToast(
-                    msg: 'Notifikasi Pulang On',
-                    backgroundColor: Color.fromARGB(255, 2, 115, 0),
-                    textColor: Colors.white,
-                  );
-                } else {
-                  await cancelNotification();
-                  setNotificationStatus(0);
-                  Fluttertoast.showToast(
-                    msg: 'Notifikasi Pulang Off',
-                    backgroundColor: Color.fromARGB(255, 2, 115, 0),
-                    textColor: Colors.white,
-                  );
-                }
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Settings()));
+                  },
+                  icon: Icon(Icons.settings)),
 
-                print("Notifikasi Doa Aktif");
-              },
-              ),
             ],
           ),
 
@@ -276,9 +258,9 @@ class HomePageState extends ConsumerState<HomePage> {
                                             ),
                                             Text(_data[index]['time']
                                                         .toString() ==
-                                                    null
-                                                ? _data[index]['time']
-                                                : '-')
+                                                    'null'
+                                                ? '-'
+                                                : _data[index]['time'])
                                           ],
                                         ),
                                       ],
